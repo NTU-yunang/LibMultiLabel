@@ -102,6 +102,16 @@ def add_all_arguments(parser):
         action="store_true",
         help="Whether the embeddings of each word is normalized to a unit vector (default: %(default)s)",
     )
+    parser.add_argument(
+        '--accumulate_grad_batches',
+        type=int,
+        default=1,
+    )
+    parser.add_argument(
+        '--use_full_gradient',
+        type=bool,
+        default=False,
+    )
 
     # model
     parser.add_argument("--model_name", default="unnamed_model", help="Model to be used (default: %(default)s)")

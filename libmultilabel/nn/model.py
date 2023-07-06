@@ -80,7 +80,7 @@ class MultiLabelModel(pl.LightningModule):
         elif optimizer_name == "adamax":
             optimizer = optim.Adamax(parameters, weight_decay=self.weight_decay, lr=self.learning_rate)
         else:
-            raise RuntimeError("Unsupported optimizer: {self.optimizer}")
+            raise RuntimeError(f"Unsupported optimizer: {self.optimizer}")
 
         torch.nn.utils.clip_grad_value_(parameters, 0.5)
 

@@ -125,6 +125,7 @@ def init_trainer(
     limit_test_batches=1.0,
     search_params=False,
     save_checkpoints=True,
+    accumulate_grad_batches=1,
 ):
     """Initialize a torch lightning trainer.
 
@@ -142,6 +143,7 @@ def init_trainer(
         search_params (bool): Enable pytorch-lightning trainer to report the results to ray tune
             on validation end during hyperparameter search. Defaults to False.
         save_checkpoints (bool): Whether to save the last and the best checkpoint or not. Defaults to True.
+        accumulate_grad_batches (int): 
 
     Returns:
         pl.Trainer: A torch lightning trainer.
@@ -186,6 +188,7 @@ def init_trainer(
         limit_train_batches=limit_train_batches,
         limit_val_batches=limit_val_batches,
         limit_test_batches=limit_test_batches,
+        accumulate_grad_batches=accumulate_grad_batches,
         deterministic="warn",
     )
     return trainer

@@ -73,6 +73,14 @@ class TorchTrainer:
             log_path=self.log_path,
             checkpoint_path=config.checkpoint_path,
         )
+
+        # calculate accumulate_grad_batches when use_full_gradient is true
+        if config.use_full_gradient == True:
+            training_data_size = len(self.datasets["train"])
+            accumulate_grad_batches = (training_data_size // config.batch_size) + 1
+        else:
+            accumulate_grad_batches=config.accumulate_grad_batches
+
         self.trainer = init_trainer(
             checkpoint_dir=self.checkpoint_dir,
             epochs=config.epochs,
@@ -86,6 +94,7 @@ class TorchTrainer:
             limit_test_batches=config.limit_test_batches,
             search_params=search_params,
             save_checkpoints=save_checkpoints,
+            accumulate_grad_batches=accumulate_grad_batches,
         )
         callbacks = [callback for callback in self.trainer.callbacks if isinstance(callback, ModelCheckpoint)]
         self.checkpoint_callback = callbacks[0] if callbacks else None
