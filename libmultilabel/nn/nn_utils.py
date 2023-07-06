@@ -143,7 +143,8 @@ def init_trainer(
         search_params (bool): Enable pytorch-lightning trainer to report the results to ray tune
             on validation end during hyperparameter search. Defaults to False.
         save_checkpoints (bool): Whether to save the last and the best checkpoint or not. Defaults to True.
-        accumulate_grad_batches (int): 
+        accumulate_grad_batches (int): Accumulate gradients on several batches before backward(). Defaults to 1.
+        use_full_gradient (bool): If True, accumulate gradients across the entire dataset. Defaults to False.
 
     Returns:
         pl.Trainer: A torch lightning trainer.
