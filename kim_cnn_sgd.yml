@@ -1,0 +1,43 @@
+# data
+training_file: data/SCOTUS/train.txt
+val_file: data/SCOTUS/valid.txt
+test_file: data/SCOTUS/test.txt
+data_name: SCOTUS
+min_vocab_freq: 1
+max_seq_length: 512
+include_test_labels: true
+remove_no_label_data: false
+
+# train
+seed: 1337
+epochs: 200
+batch_size: 8
+optimizer: sgd
+learning_rate: 0.01
+weight_decay: 0
+patience: 10
+shuffle: true
+momentum: 0.9
+loss_function: mse_loss
+# Please update the repo to the latest LibMultiLabel
+lr_scheduler: ReduceLROnPlateau
+scheduler_config:
+  factor: 0.9
+  patience: 9
+  min_lr: 0.0001
+
+# eval
+eval_batch_size: 8
+monitor_metrics: ['Micro-F1', 'Macro-F1']
+val_metric: Micro-F1
+
+# model
+model_name: KimCNN
+network_config:
+  embed_dropout: 0.2
+  encoder_dropout: 0.4
+  filter_sizes: [2, 4, 8]
+  num_filter_per_size: 128 # filter channels
+
+# pretrained vocab / embeddings
+embed_file: glove.6B.300d
